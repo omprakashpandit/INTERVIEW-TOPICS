@@ -1,0 +1,23 @@
+================
+SpringBoot Cache
+================
+-> cache means RAM storage.
+-> Springboot has default cache.(In-Memory caching) 
+-> internally used concurrentHashMap() for caching.
+-> Get operation first time store into DB and second time fetch value from cache.
+-> But save and update case first store value into cache then store into Database
+-> @CacheEvict is used to delete form cache record & it is used to delete operation
+Note:- 
+1. main class u will have to @EnableCaching
+2.GET:- before getProducts() u will have to declare @Cacheable(ProductService.java)
+  first time get from Database then second time get data from cache.
+3.POST/PUT:-first add the cache then save the database. use  @CachePut(key = "#product.id") before saveProduct()method
+4.DELETE:- use @CacheEvict(key = "#id")before deleteProduct(int id) it will all remove data from database as well as cache.
+ 
+=============
+Type of cache
+=============
+1.CDN caching(deals with facebook strorage, photo)
+2.Datbase caching(ORM caching like -lavel1 & lavel2)
+3.In-Memory caching(springboot)
+4.Web server caching

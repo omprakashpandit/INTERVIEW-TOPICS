@@ -1,0 +1,138 @@
+What is Spring Boot?
+====================
+-> Spring Boot is an appproach to develop spring based application with minimal or less configurations.
+-> whenever the application we can develop using spring framework same type of applications can be developed by using spring boot.
+-> if we use spring boot for our appplication development,we no need spend much time for configurations.
+-> Spring boot provided auto configuration approach.
+-> Autoconfiguration means , spring boot will identify the configuration which is required to run out application and it will provide that.
+
+Spring Boot Features
+====================
+1. Spring boot Starter POMs(only add starter)
+2. Version conflicts resolved
+3. Autoconfiguration
+4. Embedded Server(Tomcat & jetty)No Need to deploy war files.
+5. Actuators(Production ready features of application)
+6. Embedded DB Support.
+7. Minimum and less configuration
+8. No Boilerplate code & No requirement of XML configuration
+
+Dis-Advantages
+==============
+->Spring Boot is suitable for brand new projects
+->load all the classed into the memory. 
+Note:- Converting spring project into spring boot application is a time consuming process.
+
+Creating Spring Boot Application
+================================
+1. start.spring.io
+2. IDE STS (File-new-Project-Spring Boot-Spring Starter Project(https://start.spring.io)
+Note:- We should have internet connection to create spring boot application
+
+Bootstrapping Process in Spring Boot
+====================================
+-> when we create spring boot starter project by default we will get boot start class.
+-> Spring boot application execution will begin from that start class only
+-> that boot start class contains main method which calls SpringApplication.run(..) method.
+
+1.SpringApplication.run(..) method called
+----------------------------------------
+2. stopwatch start :- calculate the time(start)
+3. Listeners will start:- (load the pre define componenet->load the data from properties files.)
+4. prepare environment:- properties loads.(profile loaded)
+5. print banner:- (spring  logo)
+6. create application context(IOC container-managing dependency)load beans
+7. prepare context
+8. stop the stopwatch:- (end time-start time)
+9. check the logger:-(log app execution time printed)
+10. call runners:-(execute logic only one time) 2 type:- commandline(2nd order) and application runner(1st order)data load from cashy memory only one time.
+11. return IOC reference:-which is called (configurableApplicationContext object/IOC container)
+
+return type to a variable:-
+---------------------------
+cursor keep last line:-Crt+1 enter key
+
+How IOC container will be created in spring boot?
+=================================================
+->IOC container will be created by springboot as part run(..)method execution
+->Spring Boot is having 3 different approaches to create IOC container
+->Spring Boot will read our class path starters
+  a)spring-boot-strater-webflux(REACTIVE)
+  b)spring-boot-starter-web(SERVLET)
+  c)spring-boot-starter(DEFAULT)
+->As part of springApplication class constructor it is calling one method called deduceFromClassPath() to identify what starter is available in classpath. based on the starter boot will start IOC container by creating object for respective class.
+
+What are runners in Spring Boot?
+=================================
+Runners are used to execute the logic only onetime once boot application bootstratpping is completed.
+1)ApplicationRunner
+2)CommandLineRunner
+What is the return type of SpringApplication.run(..) method?
+============================================================
+->run(..)method return ConfigurableApplicaionContext. it is referece of IOC container.
+->Using this IOC reference we can get the bean objects using getBean(.)method
+
+What is Spring Bean?/Spring component
+====================
+The class which is managed by IOC is called as Spring Bean.
+
+What is the purpose start class in Spring Boot?
+===============================================
+it is used to run boot applicatin. it is entry point for boot application execution. inside start class will have main() method it will call ApringApplication.run(..)method.this run(..) method performs springboot application bootstrapping and return IOC references.
+================================
+What is @SpringBootApplication?
+================================
+-> This annotation will be available at Spring Boot Strat class
+-> This one annotation is equal to below 3 annotations.
+  1.@SpringBootConfiguration
+  2.@EnableAutoConfiguration
+  3.@ComponentScan
+->@SpringBootConfiguration annotation is equal to @configuration annotation.It represents our class as configuration class.
+	Ex:- Kafka config,DataSource,SwaggerConfig,RestTemplate config
+->@EnableAutoConfiguration identifies the configuration which is required to run our application and will provide that.
+ComponentScan
+===============
+->@componentScan annotation enables component scanning for our application. it is the process of recognizing spring bean classes available in our application
+->it is the process or identifying spring bean classes available in our application
+->component scanning is build in functionality in springboot
+->component scanning will start from base package
+->the package which contains boot start class is called as base package.
+
+
+How to represent java class as spring bean?
+===========================================
+-> The java class which is managed by IOC is called as Spring Bean.
+-> Stereotype annotations(@component,@service) are available to represent java class as spring bean.
+->whenever componetscan is started springboot will check if any of annotation it will represent as spring bean
+@Component ->class level
+@Controller ->class level
+@RestController ->class level
+@Service ->class level
+@Repository ->class level
+@Bean     -> it is method level annotaion(IOC will call the method)rest templete,swagger,datasouce
+@Configuration->class level
+
+IOC & DI
+=========
+-> IOC is a principle which is used to manage and colloborate dependencies among the objects in the application.
+-> To manage and colloborate objects IOC will use Dependency Injection.
+-> The process of injecting dependent bean object into target bean object is called as Dependency Injection.
+-> we will use Dependency Injection in 3 ways
+  1) Setter Injection
+  2) Constructor Injection
+  3) Field Injection
+->Injecting dependet bean object into targer bean object using targer bean setter method is called as setter Injection(SI)
+-> To achive setter Injection we have to specify @Autowired annotation at setter method level.
+-> Inject dependent bean object into target object using targer bean parameterized constructor is called as constructor injection(CI)
+-> When we have only one parameterized constructor then @Autowired annotation is optional.
+Field Injection(Reflection API) because of private variable
+----------------
+-> if we specify @Autowired annotation at field level then IOC will perform field injection.
+
+
+
+
+
+
+
+

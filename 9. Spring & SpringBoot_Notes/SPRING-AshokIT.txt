@@ -1,0 +1,193 @@
+Framework
+==========
+Framework is a semi developed software which provides some common logics which are required for application development.
+Frameworks are divide into 2 types
+1)ORM Framework
+2)Web Framework
+->ORM frameworks are used to develop persistence layer in applications.Ex:-Hibernate
+->web frameworks are used to develop web applications.Ex:-Struts
+================
+Spring Framework
+================
+->Spring is an applicatoin development framework.
+->By Using Spring framework we can develop end to end application.
+->Spring is not a single framework. it is collection of frameworks.
+->Spring is versatile framework.Spring can be integrated with any other framework which is available in the market.
+->Spring is Non Invasive framework .Spring it will not force the programmer to extend/implements any framework related classes and interfaces.  
+->Spring is loosely coupled framework. it is developed in modular fashion.
+->Spring framework is developed in modular fashion
+   1. Spring core
+   2. Spring context
+   3. Spring AOP
+   4. Spring DAO
+   5. Spring WEb MVC--web layer
+   6. Spring ORM 
+->Spring is an open source framework
+->Spring Core is the base module for spring framework. this module providing fundamental concepts of spring they are IOC and DI.
+IOC:- Inversion of Control
+DI:- Dependency Injection 
+->Spring Context module will take care of Configurations required in our applications.
+->Spring AOP module is used to seperate business logic and secondary logic(Helper Logic) in our application.
+transaction/security/logging/auditing these are secondary logic Or Helper Logic.
+->Spring DAO/Spring JDBC module is used to develop persistence layer.(the logic which is responsible to communicate with database)Spring JDBC module is developed on top of JDBC apI. 
+->Spring Web MVC module is used to web application
+->Spring ORM module is used to develop Persistence Layer.
+  ORM:- Object Relational Mapping(It is used to represent data in the form of objects)
+=============================================================================================================================
+Note:- One java program to communicate another java program
+  two ways:-
+=> In Java one class can talk to another class in 2 ways
+	1) Inheritence ( IS - A ) 
+	2) Composition  ( HAS -  A )
+1. by extending the properties of one class to another class.(Using Inheritance) but u can't inherit more than one class.
+2. by creating the object and call the method.(tightly couple:-creating object one class to another class) or Composition(create object and call method)
+
+
+######################## To develop classes with loosely coupling we need to use Interfaces ############
+
+package in.ashokit;
+
+public interface IEngine {
+	public int start();
+
+}
+-----
+package in.ashokit;
+
+public class PetrolEngine implements IEngine{
+
+	@Override
+	public int start() {
+		System.out.println("PetrolEngine called");
+		return 1;
+	}
+
+}
+package in.ashokit;
+-----
+public class GasEngine implements IEngine{
+
+	@Override
+	public int start() {
+		System.out.println("GasEngine called");
+		return 1;
+	}
+
+}
+-----
+package in.ashokit;
+
+public class Car {
+
+	private IEngine eng;
+
+	public Car(IEngine eng) {
+		this.eng = eng;
+	}
+
+	public void drive() {
+		int start = eng.start();
+
+		if (start >= 1) {
+			System.out.println("Journey Started...");
+		} else {
+			System.out.println("Engine in trouble...");
+		}
+	}
+}
+------
+package in.ashokit;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		
+		Car car1 = new Car (new PetrolEngine());
+		car1.drive();
+		Car car2 = new Car (new GasEngine());
+		car2.drive();
+	}
+}
+
+==========
+Solution:-
+========== 
+->IOC Container.(No need to create Object and No need to extend the class)loosely coupled.
+->To avoid this tightly coupling problem spring provided core module
+->spring core module is all about managing dependencies among the classes in the application.and making our classes as loosely coupled. 
+->spring core module provided IOC container and DI to manage dependencies among the classed in the application.
+IOC:-Inversion of control
+DI:- Dependency Injection
+->if we give any two classes for IOC to manage it can't manage with loosely coupling
+->if we want IOC to manage our classes with loosely coupling then we need to develop our classes by following strategy design pattern.
+=======================
+Strategy Design Pattern
+=======================
+->Design patterns(universal not only java) are used to represent some of the best practises to solve common problems in applications development.example:-avoid boilerplate code,creating object every time.
+->we can see 3 types of design patterns.(as per GOF[gang of four people])
+1)creational design patterns(object creations)
+2)structural desing patterns(flexibility)
+3)Behavioural design patterns(changing the algorithm in runtime)strategy design pattern
+->Using this strategy design pattern we can choose implementation or algorithm in the run time
+
+=============================
+What is Dependency Injection
+=============================
+It is the process of injecting dependent object into target object is called as dependency injection.
+
+=======================
+What is IOC container?
+=======================
+->IOC is a principle which is used to manage and colloborate dependencies among the objects in the application.
+->IOC container will perform dependency injection for us.
+->the process of creating and injecting dependent class object into target class object is called as "Dependency Injection"
+===========================
+How to start IOC container?
+===========================
+->to start IOC container will provide beans configuration file as input.  
+->we can load beans configuration file from classpath and we can load it from file system.
+->to load it from classpath we have "ClassPathResource" class
+ ClassPathResource resource=new ClassPathResource("fileName");
+->to load it from filesystem we have "FileSystemResource" class
+  Resource resource=new FileSystemResource("D://files/Beans.xml");
+we can start IOC container in 2 ways
+1. BeanFactory:- old approach
+2. ApplicationContext :- latest
+->Dependency Injection we can do in multiple ways.
+ 1.Setter Injection
+ 2.Constructor Injection
+ 3.Field Injection(Not recommended)
+================
+1.Setter Injection
+================
+The process of injecting dependent object into target object using target class setter method is called as setter injection.
+=======================
+2.Constructor Injection
+======================= 
+The process of injecting dependent class obj into target class object using target calss constructor is called as constructor injection.
+==================
+3.Field Injection
+================== 
+Note:- if we do both setter & constructor injections then setting injection will override Constructor Injection.
+
+Q)How to configure java class as spring bean?
+Ans) by using <bean/> tag we can configure our java class as spring bean
+ Ex:- <bean id="" class="com.pak.classname"/>
+Note:- every bean should have unique id
+->Spring bean is the class which is going to be managed by IOC container
+Q)How to represent java class as Spring Bean?
+Ans)1.Using XML configuration
+    2.Using Annotaions(@Component,@Service and @Repository)
+Note:- @Qulifier without @Autowire no Use.
+=========================
+What is an Annotation?
+=========================
+->Annotation is used to provide meta data.
+->from java 1.5v onwards we have annotaions support
+->Annotations came into market as an alternative XML configurations.
+->Spring framework also having support for Annotations
+->Spring boot also having support for Annotations.
+ 
+
+
+

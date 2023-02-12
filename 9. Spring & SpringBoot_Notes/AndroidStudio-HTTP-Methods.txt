@@ -1,0 +1,225 @@
+https://www.bezkoder.com/spring-boot-jpa-crud-rest-api/
+//Android Studio
+
+// http://localhost:8081/api/students --GET
+/*
+[
+    {
+        "id": 1,
+        "code": "001",
+        "name": "Khanh"
+    },
+    {
+        "id": 2,
+        "code": "002",
+        "name": "Quan"
+    }
+]
+----------------------------------JAVA-----------------------------------------
+URL url = new URL("http://localhost:8081/api/students");
+HttpURLConnection con = (HttpURLConnection) url.openConnection();
+con.setRequestMethod("GET");
+
+int status = con.getResponseCode();
+BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer content = new StringBuffer();
+while((inputLine = in.readLine()) != null) {
+	content.append(inputLine);
+}
+in.close();
+con.disconnect();
+System.out.println("Response status: " + status);
+System.out.println(content.toString());
+-----------------------------------SPRING------------------------------------
+RestTemplate rest = new RestTemplate();
+HttpHeaders headers = new HttpHeaders();
+String body = "";
+
+HttpEntity<String> requestEntity = new HttpEntity<String>(body, headers);
+ResponseEntity<String> responseEntity = rest.exchange("http://localhost:8081/api/students", HttpMethod.GET, requestEntity, String.class);
+HttpStatus httpStatus = responseEntity.getStatusCode();
+int status = httpStatus.value();
+String response = responseEntity.getBody();
+System.out.println("Response status: " + status);
+System.out.println(response);
+
+
+
+//
+http://localhost:8081/api/students/{id}
+{
+    "id": 1,
+    "code": "001",
+    "name": "Khanh"
+}
+-----------------------------JAVA--------------------------------
+URL url = new URL("http://localhost:8081/api/students/{id}");
+HttpURLConnection con = (HttpURLConnection) url.openConnection();
+con.setRequestMethod("GET");
+
+int status = con.getResponseCode();
+BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer content = new StringBuffer();
+while((inputLine = in.readLine()) != null) {
+	content.append(inputLine);
+}
+in.close();
+con.disconnect();
+System.out.println("Response status: " + status);
+System.out.println(content.toString());
+
+-----------------------------SPRING------------------------------
+RestTemplate rest = new RestTemplate();
+HttpHeaders headers = new HttpHeaders();
+String body = "";
+
+HttpEntity<String> requestEntity = new HttpEntity<String>(body, headers);
+ResponseEntity<String> responseEntity = rest.exchange("http://localhost:8081/api/students/{id}", HttpMethod.GET, requestEntity, String.class);
+HttpStatus httpStatus = responseEntity.getStatusCode();
+int status = httpStatus.value();
+String response = responseEntity.getBody();
+System.out.println("Response status: " + status);
+System.out.println(response);
+
+http://localhost:8081/api/students --POST
+{
+    "code": "005",
+    "name": "Khanh"
+}
+-----------------------------JAVA--------------------------------
+URL url = new URL("http://localhost:8081/api/students");
+HttpURLConnection con = (HttpURLConnection) url.openConnection();
+con.setRequestMethod("POST");
+con.setDoOutput(true);
+DataOutputStream out = new DataOutputStream(con.getOutputStream());
+out.writeBytes("{\n");
+out.writeBytes("    \"code\": \"005\",\n");
+out.writeBytes("    \"name\": \"Khanh\"\n");
+out.writeBytes("}");
+out.flush();
+out.close();
+
+int status = con.getResponseCode();
+BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer content = new StringBuffer();
+while((inputLine = in.readLine()) != null) {
+	content.append(inputLine);
+}
+in.close();
+con.disconnect();
+System.out.println("Response status: " + status);
+System.out.println(content.toString());
+
+-----------------------------SPRING------------------------------
+RestTemplate rest = new RestTemplate();
+HttpHeaders headers = new HttpHeaders();
+
+StringBuilder sb = new StringBuilder();
+sb.append("{\n");
+sb.append("    \"code\": \"005\",\n");
+sb.append("    \"name\": \"Khanh\"\n");
+sb.append("}");
+String body = sb.toString();
+
+HttpEntity<String> requestEntity = new HttpEntity<String>(body, headers);
+ResponseEntity<String> responseEntity = rest.exchange("http://localhost:8081/api/students", HttpMethod.POST, requestEntity, String.class);
+HttpStatus httpStatus = responseEntity.getStatusCode();
+int status = httpStatus.value();
+String response = responseEntity.getBody();
+System.out.println("Response status: " + status);
+System.out.println(response);
+
+http://localhost:8081/api/students/{id} --PUT
+{
+    "id": 1,
+    "code": "001",
+    "name": "Khanh"
+}
+-----------------------------JAVA--------------------------------
+
+URL url = new URL("http://localhost:8081/api/students/{id}");
+HttpURLConnection con = (HttpURLConnection) url.openConnection();
+con.setRequestMethod("PUT");
+
+/* Payload support */
+con.setDoOutput(true);
+DataOutputStream out = new DataOutputStream(con.getOutputStream());
+out.writeBytes("{\n");
+out.writeBytes("    \"id\": 1,\n");
+out.writeBytes("    \"code\": \"001\",\n");
+out.writeBytes("    \"name\": \"Khanh\"\n");
+out.writeBytes("}");
+out.flush();
+out.close();
+
+int status = con.getResponseCode();
+BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer content = new StringBuffer();
+while((inputLine = in.readLine()) != null) {
+	content.append(inputLine);
+}
+in.close();
+con.disconnect();
+System.out.println("Response status: " + status);
+System.out.println(content.toString());
+
+-----------------------------SPRING------------------------------
+
+RestTemplate rest = new RestTemplate();
+HttpHeaders headers = new HttpHeaders();
+
+StringBuilder sb = new StringBuilder();
+sb.append("{\n");
+sb.append("    \"id\": 1,\n");
+sb.append("    \"code\": \"001\",\n");
+sb.append("    \"name\": \"Khanh\"\n");
+sb.append("}");
+String body = sb.toString();
+
+HttpEntity<String> requestEntity = new HttpEntity<String>(body, headers);
+ResponseEntity<String> responseEntity = rest.exchange("http://localhost:8081/api/students/{id}", HttpMethod.PUT, requestEntity, String.class);
+HttpStatus httpStatus = responseEntity.getStatusCode();
+int status = httpStatus.value();
+String response = responseEntity.getBody();
+System.out.println("Response status: " + status);
+System.out.println(response);
+
+http://localhost:8081/api/students/{id} --DELETE
+{
+  "message": "Student deleted!"
+}
+-----------------------------JAVA--------------------------------
+URL url = new URL("http://localhost:8081/api/students/{id}");
+HttpURLConnection con = (HttpURLConnection) url.openConnection();
+con.setRequestMethod("DELETE");
+
+int status = con.getResponseCode();
+BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer content = new StringBuffer();
+while((inputLine = in.readLine()) != null) {
+	content.append(inputLine);
+}
+in.close();
+con.disconnect();
+System.out.println("Response status: " + status);
+System.out.println(content.toString());
+-----------------------------SPRING------------------------------
+RestTemplate rest = new RestTemplate();
+HttpHeaders headers = new HttpHeaders();
+String body = "";
+
+HttpEntity<String> requestEntity = new HttpEntity<String>(body, headers);
+ResponseEntity<String> responseEntity = rest.exchange("http://localhost:8081/api/students/{id}", HttpMethod.DELETE, requestEntity, String.class);
+HttpStatus httpStatus = responseEntity.getStatusCode();
+int status = httpStatus.value();
+String response = responseEntity.getBody();
+System.out.println("Response status: " + status);
+System.out.println(response);
+
+
+ */

@@ -1,0 +1,21 @@
+Profiles in SpringBoot
+======================
+When we develop an application in realtime that application will be tested in multiple environments before deploying to production.(Live Environment)
+we will test our application in several environments
+1)DEV
+2)SIT(QA)
+3)UAT
+4)PILOt
+5)Production
+
+For every environment several environment specific properties will be available
+===============================================================================
+a)DB Properties
+b)SMTP properties
+c)Logging properties
+d)Redis Server Properties
+e)Apache kafka properties etc..
+f)Webservices/REST API Endpoint URL
+
+all the above details we are writting in application.properties file or application.yml file.
+

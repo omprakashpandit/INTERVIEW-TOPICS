@@ -1,0 +1,3 @@
+Dependency Management
+======================
+Spring Boot automatically configures the dependencies version based on the release. Remember that when you upgrade the Spring Boot version, dependencies also will upgrade automatically. Note − If you want to specify the version for dependency, you can specify it in your configuration file.

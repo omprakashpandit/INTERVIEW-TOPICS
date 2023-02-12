@@ -1,0 +1,56 @@
+====
+AOP
+====
+-> AOP stands for Aspet Oriented Programming
+-> Spring Framework provided AOP module which is used to seperate cross cutting logics in application.
+-> Cross-cutting logic: (secondry logic which is to help to execute business logic)connection pooling, auditing logic,    transaction,security,logging,exception handling, validation,notification
+-> Business Logic:-used to perform business operation as per client requirement.
+
+============================
+What is Cross Cutting Logic?
+============================
+->Set of classes is called as one Project
+->Classes contains logic to perform operations
+->In class we will write 2 types of logics
+  1)Business Logic
+  2)Cross Cutting Logic
+->Business logic is responsible to meet the client requirement.
+->Cross cutting logics will help to executing business logics in better manner.
+->if we develop methods by combining business logic and cross cutting logic it will create tightly coupling problem.
+     ->if we modify business logic, cross cutting logic may effect
+     ->if we modify cross-cutting logic ,business logic may effect
+->To avoid this problem we have to Separate business logic and cross-cutting logic in application.
+->To seperate business logics and cross-cutting logics spring framwork provided AOP Module.
+->AOP stands for Aspect Oriented Programming.
+
+============
+Terminology
+============
+1. Aspect:-the class which contains secondry logic(cross cutting logic)
+    LoggingAspect
+    AuditingAspect
+    SecurityAspect
+    TXAspect
+    ExceptionHandlingAspect 
+
+2. Advice:-It represents when Aspect logic should execute.
+  1)Before Advice:- (it will execute before business logic)
+  2)After Advice:- (will execute after business logic)
+  3)Arround Advice:-(will execute before and after business logic)
+  4)Throws Advice:-(will execute when exception occurs in B.L)
+
+Target: The class which contains business logic is called as Target.
+
+3. JoinPoint:-(where you want to use secondry logic(implement)).it represents where secondary logic should integrate with primary logic . spring AOP supports method level join point.
+
+4.PointCut:- it represents for which business methods secondary logic should apply.
+Note:- Bydefault aspect logic is applicable for all methods available in target.
+
+5.Weaving:-The process of combining Target and Aspect is called as Weaving.
+
+6.Proxy:-Weaving will generate one new class by combining target and aspet that class is called as proxy class.
+Spring AOP will execute proxy class in the runtime.
+
+Note:-
+Spring AOP will take care of integrating Business logic with secondary component logic in runtime and will execute it.
+AOP supports only method level join point

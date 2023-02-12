@@ -1,0 +1,47 @@
+SpringBoot Redis
+================
+Download:-github.com/MicrosoftArchive/redis
+URL:- educative.io/blog/what-is-redis
+->Redis (REmote DIctionary Server) is an advanced NoSQL key-value data store used as a database, cache, and message broker. 
+->Open Source
+->written in C
+->In Memory Database just like H2
+->Cache
+->Pub-Sub
+->more faster because of Hash.
+
+RDBS -Table
+NOSQL -Document
+Hash- means Table
+Redis(NoSQL) -key & value (id,object)
+https://www.npmjs.com/package/redis-commander
+https://redis.io/docs/getting-started/installation/install-redis-on-mac-os/
+
+
+POM.XML(added Dependencies)
+--------
+Note:-
+Spring Data Redis(Access+Driver)
+Web
+Lombok
+Jedis 3.9.0
+added pluging:- redis Helper
+                redis commander
+----------
+jt-new-con
+localhost
+Port 6379
+
+PostMan --POST
+----------------
+{
+ "id":1,
+ "firstName":"om";
+ "lastName":"prakash",
+ "email":"om@gmail.com",
+ "dob":"20/11/1980",
+ "phone":"34324324"
+}
+
+daily code 
+Spring-MVC-Tutorials/SpringBoot-Redis-Demo/

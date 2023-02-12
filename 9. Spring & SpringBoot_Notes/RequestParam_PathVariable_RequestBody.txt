@@ -1,0 +1,82 @@
+  @GetMapping("/tutorials")
+  public ResponseEntity<List<Tutorial>> getAllTutorials(@RequestParam(required = false) String title) 
+
+@RestController
+public class UserController {
+	
+	@GetMapping("/users")
+	public String getName(@RequestParam(name = "userName") String name) {
+		return "My name is "+name;
+	}
+run:-http://localhost:8080/users?userName=om
+-------------------------------------------
+  @GetMapping("/tutorials/{id}")
+  public ResponseEntity<Tutorial> getTutorialById(@PathVariable("id") long id)
+
+@GetMapping("/users/{userName}")
+	public String printUserName(@PathVariable("userName") String name) {
+		return "My name is "+name;
+	}
+run:-http://localhost:8080/users/om
+--------------------------------------------
+
+  @PostMapping("/tutorials")
+  public ResponseEntity<Tutorial> createTutorial(@RequestBody Tutorial tutorial) 
+@PostMapping("/users")
+	public void printData(@RequestBody User user) {
+		System.out.println("Printing the user data:"+user);
+	}
+
+run:-http://localhost:8080/users
+{
+ "firstName": "om",
+ "lastNmae": "prakash"
+}
+---------------------------------------------
+  @PutMapping("/tutorials/{id}")
+  public ResponseEntity<Tutorial> updateTutorial(@PathVariable("id") long id, @RequestBody Tutorial tutorial) 
+  
+  @DeleteMapping("/tutorials/{id}")
+  public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) 
+
+  @DeleteMapping("/tutorials")
+  public ResponseEntity<HttpStatus> deleteAllTutorials() 
+
+o	URI Versioning
+o	Versioning using Custom Request Header
+o	Versioning using Accept Header
+---------------------
+1.	@GetMapping("/jpa/users/{id}/posts")  
+2.	public List<Post> retriveAllUsers(@PathVariable int id)  
+3.	{  
+4.	Optional<User> userOptional= userRepository.findById(id);  
+5.	if(!userOptional.isPresent())  
+6.	{  
+7.	throw new UserNotFoundException("id: "+ id);  
+8.	}  
+9.	return userOptional.get().getPosts();  
+10.	}  
+----------------------
+1.	@PostMapping("/jpa/users/{id}/posts")  
+2.	public ResponseEntity<Object> createUser(@PathVariable int id, @RequestBody Post post)      
+3.	{  
+4.	Optional<User> userOptional= userRepository.findById(id);  
+5.	if(!userOptional.isPresent())  
+6.	{  
+7.	throw new UserNotFoundException("id: "+ id);  
+8.	}  
+9.	User user=userOptional.get();     
+10.	//map the user to the post  
+11.	post.setUser(user);  
+12.	//save post to the database  
+13.	postRepository.save(post);  
+14.	//getting the path of the post and append id of the post to the URI   
+15.	URI location=ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(post.getId()).toUri();  
+16.	//returns the location of the created post  
+17.	return ResponseEntity.created(location).build();  
+18.	}  
+
+
+ 
+ 
+ 

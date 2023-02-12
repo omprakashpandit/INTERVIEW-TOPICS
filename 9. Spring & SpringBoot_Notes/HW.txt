@@ -1,0 +1,51 @@
+/**
+     * Method under test: {@link ResourceProviderUtil#isFileExists(String)}
+     */
+    @Test
+    void testIsFileExists() {
+        assertTrue(ResourceProviderUtil.isFileExists("endpoint/application-endpoint"));
+        assertFalse(ResourceProviderUtil.isFileExists("Name"));
+    }
+
+
+@Test
+    void testGetCountryCode() {
+        //  assertNotEquals(TypicalBusinessService.VALID_COUNTRY_CODE, (new TypicalBusinessService()).getCountryCode("UAE"));
+        assertEquals(TypicalBusinessService.VALID_COUNTRY_CODE, (new TypicalBusinessService()).getCountryCode("GB"));
+        assertThrows(EmptyException.class,
+                () -> (new TypicalBusinessService()).getCountryCode((String) TypicalBusinessService.VALID_COUNTRY_CODE));
+        assertEquals(TypicalBusinessService.VALID_COUNTRY_CODE, (new TypicalBusinessService()).getCountryCode("GB"));
+    }
+//UAE
+ @Test
+    void testGetCountryCode() {
+        assertEquals(TypicalBusinessService.VALID_COUNTRY_CODE, (new TypicalBusinessService()).getCountryCode("GB"));
+    }
+
+//""
+@Test
+    void testGetCountryCode() {
+        assertThrows(EmptyException.class, () -> (new TypicalBusinessService()).getCountryCode("GB"));
+    }
+
+//multiple if
+ public String getCountryCode(String countryCode) {
+        if (countryCode.isEmpty()) {
+            throw new EmptyException(EmptyException.BAD_COUNTRY_CODE);
+        }
+        if("UAE".equalsIgnoreCase(countryCode)) {
+            return "VALID_COUNTRY_CODE";
+        }
+        return countryCode;
+    }
+@Test
+    void testGetCountryCode() {
+        assertEquals("GB", (new TypicalBusinessService()).getCountryCode("GB"));
+        assertEquals("VALID_COUNTRY_CODE", (new TypicalBusinessService()).getCountryCode("UAE"));
+        assertThrows(EmptyException.class, () -> (new TypicalBusinessService()).getCountryCode(""));
+    }
+
+@Test(expected = IllegalArgumentException.class)
+	public void isNotPlaindromeExceptionTest() {
+		assertEquals(false, app.isPalindrome(null));
+	}
