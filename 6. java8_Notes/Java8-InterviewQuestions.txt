@@ -1,0 +1,138 @@
+Q=>Primitive Sorting?
+Ans:- list.stream().sorted().forEach(System.out::println) //ascending order
+      list.stream().sorted(Comparator.reverseOrder()).forEach(System.out::println) //descending order
+
+Q=>Custom Class Sorting?
+Ans:-emp.steam().sorted((o1,o2)->(int)(o1.getSalary()-o2.getSalary())).forEach(System.out::println)
+     emp.strem().sorted(Comparator.Comparing(Employee::getName()).forEach(System.out::println)
+
+Q=>Count using Filter
+Ans:-long count=Stream.of(10,20,30,40,50).filter(x->x>20).count()
+     long count=emplist.stream().filter(e->e.getSalary()<2000).count()
+     Stream.of("java","javaScript","C","python")
+           .filter(x->x.contains("j"))
+           .map(String :: toUpperCase)
+           .forEach(System.out::println); 
+Q=>List using Filter
+      Stream.of("java","javaScript","C","python")
+           .filter(x->x.contains("j"))
+           .collect(Collectors.toList())
+           .forEach(System.out::println); 
+Q=>Set using Filter(remove duplicate element)
+      Stream.of("java","javaScript","C","python")
+           .filter(x->x.contains("j"))
+           .collect(Collectors.toSet())
+           .forEach(System.out::println); 
+Q=>Parallel?
+List<Integer> value=Arrays.asList(1,2,3,4,5)
+value.stream().parallel().forEach(System.out::println)
+
+Q=>ParallelStream?
+List<Integer> value=Arrays.asList(1,2,3,4,5)
+value.stream().parallelSteam().forEach(System.out::println)
+
+
+Q=>What are all featues of java8 ?
+Ans:-
+ 1. Functional Interface
+ 2. Lambda Expression
+ 3. Stream
+ 4. CompletableFuture
+ 5. Java DateTime APi
+
+Q=>What is funcational interface?
+Ans:-an Interface that contains only one abstract method is known functional interface.It can have any number of default and static methods.
+ Ex:- runnable,callable,comparator has two method compare and equals exteds Object class.
+Note:- 
+->equals method does not count for functional interface.
+->abstract method must be  overriden from child classes. 
+->default method(change the funcationality in future) is optional to override the child classes.called with interfaceName.super.methodName
+->static method(common function to all) is used just like utility class  method. called with interfaceName.methodName
+
+Q=>can we extends functional interface form another functional interface?
+Ans:-Yes you can but its acts as normal interface not a functional interface.
+
+Q=>what are all functional interface introduced in java8?
+Ans:-
+ 1. Consumer:- void accept(T t);
+ 2. Function :-R apply(T t);
+ 3. Predicate:- boolean test(T t);
+ 4. Supplier :- T get();
+
+Q=>what is lambda expression?
+Ans:-it provides a clear and concise way to represent method of a functional using an expression. Ex:- ->
+
+Q=>what's the advantages and disadvantages of lambda expression it?
+Ans:-
+Advantages:-
+-----------
+1.avoid writting anonymous imple
+2.it saves a lots of code
+3.the code is directly readable without interpretation
+
+DisAdvantages:-
+---------------
+1.Hard to use without an IDe
+2.complex to debug
+
+Q=>What is stream API?
+Ans:-Stream API introduced in java8 and it is used to process collections of objects with functional style of coding using lambda expression.
+Features:-
+->A stream is not a data structure instead it takes input from the collections, Array or I/O channels
+->stream don't change the original data structure, they only provide the result as the pipelined methods.
+ Example:-
+ List<Integer> list=Arrays.asList(25,4,6,8,9,1,2,10);
+ list.stream().filter(t->t>4).sorted().forEach(t->System.out.println(t));
+ oR
+list.stream().filter(t->t>4).sorted().forEach(System.out::println);
+oR
+list.stream().filter(t->t>4).sorted().forEach(Test::printElement);
+oR
+Test test=new Test();
+list.stream().filter(t->t>4).sorted().forEach(test::printElement);
+
+public static void printElement(int i){
+	System.out.println(i)
+}
+public void printElement(int i){
+	System.out.println(i)
+}
+
+Q=>Spell few stream method you used in your project?
+Ans:-filter,forEach,sorted,map,reduce,groupingBy,count,collect
+
+Q=>When to use map & flatMap?
+Ans:-
+public class User{
+	private String name;
+	private String phone;
+	private List<String> email;
+}
+List<User>users=Stream.of(
+new User("user1",12345678,Arrays.asList('abc@gmail.com','zz@gmail.com')),
+new User("user2",45454545,Arrays.asList('xyz@gmail.com','jj@gmail.com')))
+.collect(Collectors.toList());
+=====
+Map
+=====
+List<String>phoneNumber=users.stream().map(User::getphone).collect(Collectors.toList());
+System.out.println(phoneNumber);
+=======
+FlatMap
+=======
+List<String>emailList=users.stream().flatMap(x->x.getEmail().stream()).collect(Collectors.toList());
+System.out.println(emailList);
+Q=>wap using stream to find frequency of each character in a given strring?
+Sting input="prakash";
+Map<String,Long> countMap=Arrays.stream(input.split(""))
+ .collect(groupingBy(Function.identity(),counting()));
+System.out.println(countMap);
+
+Q=>Assume you have list of employee in various dept,WAP to find highest paid employee from each dept?
+Ans:-Map<string,Employee> empMap=emp.stream().collect(groupingBy(Employee::getDept,
+collectingAndThen(maxBy(comprator.comparingDouble(Employee::getSalary)),Optional::get)
+));
+System.out.println(empMap);
+
+Q=>What is CompletableFuture?
+Ans:-completableFuture is used for asynchronous programming in java.Asynchronous programming is a means of writting non-blocking code by running a task on a separate thread than the main application thread and notifying the main thread about its progress , completion or failure.
