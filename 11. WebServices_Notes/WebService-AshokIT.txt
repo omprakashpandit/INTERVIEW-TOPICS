@@ -1,0 +1,65 @@
+=>WebService is a technology which is used to develop distributed application.
+========================
+WebService Architecture
+========================
+1.Provider:-the application which is providing business services to other applications is called as Provider.
+2.Consumer:-the application which is accessing business services from other applications is called as Consumer. 
+3.WSDL:-WSDL stands "Webservices Description Language". it contains provider details. WSDL is an XML.
+4.SOAP:-SOAP stands "Simple Object Access Protocol".SOAP acts as payload carrier between consumer & provider.SOAP is XML.
+5.UDDI:-UDDI is a registry where WSDL files will be stored.(outdated)
+
+
+Webservices : (We can expose our services to users)
+---------------------------------------------------
+1. SOAP
+   -> SOAP protocol
+   -> XML MediaType 
+   -> secure
+   -> Design is complex 
+        WSDL
+        Wsdl2Java
+        pojo
+        stub -> call the method
+2. REST
+   -> HTTP , HTTPS 
+   -> XML , JSOn , TEXT , HTMl Any mediatype 
+   -> Secure (Token base auth)
+   -> Design Easy
+      create method and define HTTP method type
+      define the URL (user access url)
+
+3. Layer Architecture (industry standard)
+=========================================
+
+course-service:
+---------------
+1.  add course
+2.  update course
+3.  delete course
+4.  view / get course
+
+
+HTTP METHODS :
+------------
+POST        ----------> Create Resource (insert something in DB)
+PUT         ----------> modifying the resource (update in DB)
+GET         ----------> fetch / load the resource (GET from DB)
+DELETE      ----------> delete from resource (HARD DELETE)
+
+OPTION
+PATCH       ----------> modify resource partially 
+HEAD        
+
+Payload :
+---------
+    {
+    "name":"Spring boot",
+    "trainerName":"Basant",
+    "duration":"90",
+    "startDate":"18-08-2022",
+    "courseType":"Live class",
+    "fees":5000,
+    "isCertificateAvailable":true,
+    "description":"complete spring boot microservice course"
+
+    }
